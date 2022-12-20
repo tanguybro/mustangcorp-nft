@@ -11,7 +11,7 @@ contract MustangCorp is ERC721, Ownable {
     using Strings for uint256;
 
     Counters.Counter private tokenId;
-    uint256 public constant supply = 10;
+    uint256 public constant SUPPLY = 10;
     string public baseTokenURI;
 
     constructor(string memory _baseTokenURI) ERC721('MustangCorp', 'MTC') {
@@ -19,9 +19,9 @@ contract MustangCorp is ERC721, Ownable {
     }
 
     function mint() external onlyOwner {
-        require(tokenId.current() > 0, 'The collection has already been minted');
+        require(tokenId.current() == 0, 'The collection has already been minted');
 
-        for (uint256 i = 0; i < supply; i++) {
+        for (uint256 i = 0; i < SUPPLY; i++) {
             uint256 newTokenId = tokenId.current();
             _mint(msg.sender, newTokenId);
             tokenId.increment();
