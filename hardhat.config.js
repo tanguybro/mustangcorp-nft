@@ -1,26 +1,13 @@
-import "@nomicfoundation/hardhat-toolbox";
-import "@nomiclabs/hardhat-ethers";
-import "@nomiclabs/hardhat-etherscan";
-import * as dotenv from "dotenv";
-import { HardhatUserConfig } from "hardhat/config";
+require('dotenv').config();
 
-dotenv.config();
+const { API_URL, PRIVATE_KEY } = process.env;
 
-const config: HardhatUserConfig = {
-  solidity: "0.8.17",
-  networks: {
-    polygonMumbai: {
-      url: process.env.MUMBAI_URL!,
-      accounts: [process.env.WALLET_PRIVATE_KEY!],
-    }
-  },
-  etherscan: {
-    apiKey: {
-      polygonMumbai: process.env.MUMBAI_PRIVATE_KEY!,
+module.exports = {
+    solidity: '0.8.17',
+    networks: {
+        mumbai: {
+            url: API_URL,
+            accounts: [`0x${PRIVATE_KEY}`],
+        },
     },
-  },paths: {
-    artifacts: "./artifacts"
-  }
 };
-
-export default config;
